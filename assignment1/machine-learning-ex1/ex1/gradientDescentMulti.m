@@ -17,16 +17,15 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-
-
-
-
-
-
-
-
-
-
+    predictions = X * theta;
+    err = predictions - y;
+    xSize = size(X, 2);
+    for i = 1:xSize
+    	temp = err .* X(:, i);
+	mySum = sum(temp);
+	delta = mySum / m;
+	theta(i) = theta(i) - (alpha * delta);
+    end
     % ============================================================
 
     % Save the cost J in every iteration    

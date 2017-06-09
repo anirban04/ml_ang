@@ -12,11 +12,23 @@ J = 0;
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
+%works
+%sumX=0;
+%for i=1:m
+%	ithRowOfX = X(i, :);
+%	predictions = ithRowOfX * theta;
+%	err = (predictions - y(i));
+%	squareError = err^2;
+%	sumX = sumX + squareError;
+%end
+%J = (1/(2 * m)) * sumX;
+%works
 
 
-
-
-
+predictions = X * theta;
+err = (predictions - y);
+squareError = err.^2;
+J = (1/(2 * m)) * sum(squareError);
 % =========================================================================
 
 end
