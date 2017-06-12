@@ -13,7 +13,11 @@ figure; hold on;
 %
 
 
-
+%y is just telling us whather to plot X(row, col) as 'o' or 'x'%
+pos = find(y==1);
+neg = find(y==0);
+plot(X(pos, 1), X(pos, 2), 'k+', 'LineWidth', 2, 'Markersize', 7);
+plot(X(neg, 1), X(neg, 2), 'ko', 'LineWidth', 2, 'MarkerSize', 7);
 
 
 

@@ -20,12 +20,20 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+%computing the cost %
 
+h = sigmoid(X * theta);
+logA = log(h);
+logB = log(1- h);
+transposeA = y';
+transposeB = (1 - y)';
+termA = transposeA * logA;
+termB = transposeB * logB;
+J = (1/m) *  (-termA - termB);
 
-
-
-
-
+%computing the gradient parameters%
+m = size(X, 1);
+grad = (X' * (h - y)) ./ m; 
 
 % =============================================================
 
