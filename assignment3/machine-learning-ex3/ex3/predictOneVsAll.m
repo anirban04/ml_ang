@@ -29,14 +29,11 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
-
-
-
-
-
-
-
+%for row 1:m
+%	xElement = X(row, :);
+%	temp = sigmoid(xElement' * all_theta))
+temp = sigmoid(all_theta * X');
+[maxVal, maxInd]= max(temp);
+p = maxInd';
 % =========================================================================
-
-
 end
