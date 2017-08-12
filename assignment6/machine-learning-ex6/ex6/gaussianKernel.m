@@ -15,12 +15,12 @@ sim = 0;
 %               sigma
 %
 %
-
-
-
-
-
-
+diff = x1 - x2;
+sqDiff = diff .^ 2;
+sumSqDiff = sum(sqDiff);
+expTerm = sumSqDiff / (2 * sigma * sigma);
+expTerm = -1 * expTerm;
+sim = exp(expTerm);
 % =============================================================
     
 end

@@ -45,7 +45,7 @@ email_contents = regexprep(email_contents, '[^\s]+@[^\s]+', 'emailaddr');
 % Handle $ sign
 email_contents = regexprep(email_contents, '[$]+', 'dollar');
 
-
+vocabListLength = length(vocabList);
 % ========================== Tokenize Email ===========================
 
 % Output the email to screen as well
@@ -53,6 +53,7 @@ fprintf('\n==== Processed Email ====\n\n');
 
 % Process file
 l = 0;
+
 
 while ~isempty(email_contents)
 
@@ -97,17 +98,13 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
-
-
-
-
-
-
-
-
-
+for idx = 1:vocabListLength
+	compRes = strcmp(str, vocabList{idx});
+	if (compRes == 1)
+  		word_indices = [word_indices; idx];
+	end;
+end;
     % =============================================================
-
 
     % Print to screen, ensuring that the output lines are not too long
     if (l + length(str) + 1) > 78

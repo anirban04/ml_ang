@@ -22,13 +22,26 @@ sigma = 0.3;
 %  Note: You can compute the prediction error using 
 %        mean(double(predictions ~= yval))
 %
+minErr = 1000000000;
 
-
-
-
-
-
-
+cIter = 0.01;
+count = 0;
+a = 99999999;
+while(cIter <= 30)
+  sigmaIter = 0.01;
+  while(sigmaIter <= 30)
+  	count++;
+	model= svmTrain(X, y, cIter, @(x1, x2) gaussianKernel(x1, x2, sigmaIter)); 
+  	predictions = svmPredict(model, Xval);
+        err = mean(double(predictions ~= yval));
+	if (err < minErr)
+  		C = cIter;
+		sigma = sigmaIter;
+		minErr = err;
+	end;
+	sigmaIter = sigmaIter * 3;
+  end;
+  cIter = cIter * 3;
+end;
 % =========================================================================
-
 end
