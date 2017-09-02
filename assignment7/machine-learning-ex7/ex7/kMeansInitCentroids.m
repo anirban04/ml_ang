@@ -13,12 +13,11 @@ centroids = zeros(K, size(X, 2));
 %               the dataset X
 %
 
+%randomly permute indices of the input and then select first K examples based
+%on random permutation of the indices.
 
-
-
-
-
-
+randIdx = randperm(size(X, 1));
+centroids = X(randIdx(1:K), :);
 
 % =============================================================
 

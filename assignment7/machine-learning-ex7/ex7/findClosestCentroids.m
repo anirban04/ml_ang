@@ -10,7 +10,6 @@ K = size(centroids, 1);
 
 % You need to return the following variables correctly.
 idx = zeros(size(X,1), 1);
-
 % ====================== YOUR CODE HERE ======================
 % Instructions: Go over every example, find its closest centroid, and store
 %               the index inside idx at the appropriate location.
@@ -20,14 +19,22 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-
-
-
-
-
-
-
+m = length(X);
+for i = 1:m
+	% basically a min finding algo, init min to a very large number
+	% and then reassign min to any lower value found in the run. 
+	min = 4000000000;
+	minIdx = 0;
+	for j = 1:K
+		%send column vectors to the getEucledianDist function
+		dist = getEucledianDist(X(i, :)', centroids(j, :)');
+		if (dist < min)
+  			min = dist;
+			minIdx = j;
+		end
+	end
+	idx(i) = minIdx;
+end
 % =============================================================
-
 end
 

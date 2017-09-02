@@ -17,10 +17,10 @@ Z = zeros(size(X, 1), K);
 %                    x = X(i, :)';
 %                    projection_k = x' * U(:, k);
 %
-
-
-
-
+Ureduce = U(:, 1:K);
+% Below is basically the vectorized implementation of the last step in
+% the PCA algorithm, that is explained in the theory pages/lectures.
+Z = (Ureduce' * X')'; 
 % =============================================================
 
 end
