@@ -5,7 +5,6 @@ function [bestEpsilon bestF1] = selectThreshold(yval, pval)
 %   threshold to use for selecting outliers based on the results from a
 %   validation set (pval) and the ground truth (yval).
 %
-
 bestEpsilon = 0;
 bestF1 = 0;
 F1 = 0;
@@ -23,18 +22,19 @@ for epsilon = min(pval):stepsize:max(pval)
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
 
+    predictions = (pval < epsilon);
+    
+    % using a vectorized implemantation to find the number of tp, fp, fn
+    tp = sum((predictions == 1) & (yval == 1));
+    fp = sum((predictions == 1) & (yval == 0));
+    fn = sum((predictions == 0) & (yval == 1));
+    
+    % calculate the values of precision and recall using std formulas
+    prec = tp / (tp + fp);
+    rec = tp / (tp + fn);
 
-
-
-
-
-
-
-
-
-
-
-
+    % compute F1 score using standard formula
+    F1 = (2 * prec * rec) / (prec + rec);
     % =============================================================
 
     if F1 > bestF1

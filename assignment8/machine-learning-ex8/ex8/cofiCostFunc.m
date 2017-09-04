@@ -39,24 +39,28 @@ Theta_grad = zeros(size(Theta));
 %        Theta_grad - num_users x num_features matrix, containing the 
 %                     partial derivatives w.r.t. to each element of Theta
 %
+% Low rank matrix factorization
+xThetaT = X * Theta';
+diff = xThetaT - Y;
+sqDiff = diff .^2;
+J = (1 / 2) * sum(sum((sqDiff .* R)));
 
+ratedDiff = diff .* R;
 
+% Note : X_grad should be a matrix of the same size as X
+X_grad = ratedDiff * Theta;
+% Note : Theta_grad should be a matrix of the same size as Theta
+Theta_grad = ratedDiff' * X;
 
+% Adding regularization to cost function
+sqTheta = Theta .^2;
+sqX = X .^2;
+J = J + ((lambda / 2) * sum(sum(sqTheta))) + ((lambda / 2) * sum(sum(sqX)));
 
-
-
-
-
-
-
-
-
-
-
-
+% Adding regularization to gradient
+X_grad = X_grad + (lambda .* X);
+Theta_grad = Theta_grad + (lambda .* Theta);
 
 % =============================================================
-
 grad = [X_grad(:); Theta_grad(:)];
-
 end

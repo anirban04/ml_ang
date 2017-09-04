@@ -20,17 +20,11 @@ sigma2 = zeros(n, 1);
 %               the data for the i-th feature and sigma2(i)
 %               should contain variance of the i-th feature.
 %
-
-
-
-
-
-
-
-
-
-
+mu = (1 / m) .* ((sum(X))');
+for i=1:n
+	% Second arg asks the var function to normalize with
+	% N, as opposed to N - 1, whish is the default.
+	sigma2(i) = var(X(:, i), 1);
+end
 % =============================================================
-
-
 end
